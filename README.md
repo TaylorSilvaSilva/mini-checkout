@@ -24,8 +24,8 @@ Mini-checkout desenvolvido em React + TypeScript + TailwindCSS, atenddendo o tes
 
 ## Regras de Negócio
 
-- **O comprador sempre paga o preço fixo do produto.**
-- **As taxas da plataforma são descontadas do produtor**, nunca do comprador.
+- O comprador sempre paga o preço fixo do produto.
+- As taxas da plataforma são descontadas do produtor, nunca do comprador.
 - Diferenciei no código:  
   - `Total do comprador` = preço fixo do produto  
   - `Valor líquido do produtor` = preço do produto - taxa
