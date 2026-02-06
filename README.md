@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Teste Front-End Cakto - [Seu Nome]
 
-## Getting Started
+Mini-checkout desenvolvido em React + TypeScript + TailwindCSS, atenddendo o teste da empresa para a vaga de desenvolvedor Senior.
 
-First, run the development server:
+---
 
+## Decisões Técnicas
+
+- Usei **Next.js 13 com App Router** para estruturar a página principal e manter dados estáticos no `produtoMock`.
+- Separei a **lógica de negócios do domínio** (`/taxas.ts` e `/cpf.ts`) do **componente de UI** (`CheckoutForm.tsx`), garantindo clareza e reuso.
+- O **CheckoutForm** é totalmente **mobile-first**, com destaque visual para PIX, feedback de validações e loading state no botão.
+- Usei **TailwindCSS** para estilização rápida, responsiva e consistente.
+- Evitei re-renders desnecessários mantendo estado local apenas no que muda no formulário.
+
+---
+
+## Transparência de Uso de IA
+
+- Usei IA para **estruturar o código inicial do formulário**, criar funções de cálculo de taxas e sugerir validação de CPF.
+- Todas as funções e lógicas foram **revisadas e ajustadas manualmente**, garantindo que os cálculos estejam corretos e que o código esteja consistente em português.
+- IA foi usada apenas como **auxílio inicial**, decisões finais e refatorações foram minhas.
+
+---
+
+## Regras de Negócio
+
+- **O comprador sempre paga o preço fixo do produto.**
+- **As taxas da plataforma são descontadas do produtor**, nunca do comprador.
+- Diferenciei no código:  
+  - `Total do comprador` = preço fixo do produto  
+  - `Valor líquido do produtor` = preço do produto - taxa
+
+---
+
+## Como Executar
+
+1. Instalar dependências:
 ```bash
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

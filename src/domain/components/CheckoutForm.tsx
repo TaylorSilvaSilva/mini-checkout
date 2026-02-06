@@ -22,26 +22,33 @@ export function CheckoutForm({ produto }: CheckoutFormProps) {
   const [cpf, setCpf] = useState('');
   const [metodoPagamento, setMetodoPagamento] = useState<MetodoPagamento>('PIX');
   const [parcelas, setParcelas] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-  // Validador de email
+  // Validações
   const emailValido = email.includes('@') && email.includes('.');
-
-  // Validador de CPF
   const cpfValido = cpf === '' || validarCPF(cpf);
 
+  // Calcula valor do produtor
   const taxa: ResultadoTaxa = calcularTaxaProdutor(
     produto.precoAtual,
     metodoPagamento,
     parcelas
   );
-
   const taxaPix = calcularTaxaProdutor(produto.precoAtual, 'PIX', 1);
 
-  const destaquePIX = metodoPagamento === 'PIX' ? 'border-green-500' : 'border-gray-300';
+  const destaquePIX = metodoPagamento === 'PIX' ? 'border-green-500 bg-green-50' : 'border-gray-300';
+
+  const finalizarCompra = () => {
+    setLoading(true);
+    setTimeout(() => {
+      alert('Compra finalizada com sucesso!');
+      setLoading(false);
+    }, 1500);
+  };
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      <h1 className="text-xl font-bold mb-4">{produto.nome}</h1>
+    <div className="max-w-md mx-auto p-4 sm:p-6">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4">{produto.nome}</h1>
 
       {/* Email */}
       <input
@@ -64,7 +71,7 @@ export function CheckoutForm({ produto }: CheckoutFormProps) {
       {!cpfValido && cpf !== '' && <p className="text-red-500 text-sm mb-2">CPF inválido</p>}
 
       {/* Método de Pagamento */}
-      <div className="mb-2 flex gap-4">
+      <div className="mb-2 flex flex-col sm:flex-row gap-2">
         <label className={`flex-1 p-2 border rounded cursor-pointer ${destaquePIX}`}>
           <input
             type="radio"
@@ -103,23 +110,22 @@ export function CheckoutForm({ produto }: CheckoutFormProps) {
       )}
 
       {/* Resumo */}
-      <div className="border p-2 rounded bg-gray-50">
-        <p>Valor do produto: R${produto.precoAtual.toFixed(2)}</p>
-        <p>Total do comprador: R${produto.precoAtual.toFixed(2)}</p>
-        <p>Taxa Cakto: R${taxa.valorTaxa.toFixed(2)}</p>
-        <p>Valor líquido do produtor: R${taxa.valorLiquido.toFixed(2)}</p>
+      <div className="border p-3 rounded bg-gray-50 mb-4">
+        <p>Valor do produto: <span className="font-semibold">R${produto.precoAtual.toFixed(2)}</span></p>
+        <p>Total do comprador: <span className="font-semibold">R${produto.precoAtual.toFixed(2)}</span></p>
+        <p>Taxa Cakto: <span className="font-semibold">R${taxa.valorTaxa.toFixed(2)}</span></p>
+        <p>Valor líquido do produtor: <span className="font-semibold">R${taxa.valorLiquido.toFixed(2)}</span></p>
         {metodoPagamento === 'CARTAO' && (
-          <p>
-            Economia escolhendo PIX: R${(taxaPix.valorTaxa - taxa.valorTaxa).toFixed(2)}
-          </p>
+          <p>Economia escolhendo PIX: <span className="font-semibold">R${(taxaPix.valorTaxa - taxa.valorTaxa).toFixed(2)}</span></p>
         )}
       </div>
 
       <button
-        className="w-full mt-4 bg-blue-500 text-white p-2 rounded disabled:opacity-50"
-        disabled={!emailValido || !cpfValido}
+        className={`w-full mt-2 p-2 rounded text-white ${loading ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'}`}
+        disabled={!emailValido || !cpfValido || loading}
+        onClick={finalizarCompra}
       >
-        Finalizar Compra
+        {loading ? 'Processando...' : 'Finalizar Compra'}
       </button>
     </div>
   );
