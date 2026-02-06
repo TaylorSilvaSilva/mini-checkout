@@ -16,9 +16,9 @@ Mini-checkout desenvolvido em React + TypeScript + TailwindCSS, atenddendo o tes
 
 ## Transparência de Uso de IA
 
-- Usei IA para **estruturar o código inicial do formulário**, criar funções de cálculo de taxas e sugerir validação de CPF.
-- Todas as funções e lógicas foram **revisadas e ajustadas manualmente**, garantindo que os cálculos estejam corretos e que o código esteja consistente em português.
-- IA foi usada apenas como **auxílio inicial**, decisões finais e refatorações foram minhas.
+- Usei IA para estruturar o código inicial do formulário, criar funções de cálculo de taxas e sugerir validação de CPF.
+- Todas as funções e lógicas foram revisadas e ajustadas manualmente, garantindo que os cálculos estejam corretos e que o código esteja consistente
+- IA foi usada apenas como auxílio inicial, me ajudando a manter  melhores praticas de programacao ,  decisões finais e refatorações foram minhas.
 
 ---
 
